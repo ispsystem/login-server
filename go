@@ -1,5 +1,7 @@
 #!/bin/sh
 
+test -f config.sh && . config.sh
+
 if [ -z "${log}" ]; then
 	log=/tmp/ssh.log
 fi
