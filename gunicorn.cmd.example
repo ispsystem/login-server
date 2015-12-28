@@ -1,0 +1,1 @@
+gunicorn  --keyfile server.key --certfile server.crt  -t 60 --reload --ssl-version 5 --ciphers TLSv1.2,TLSv1 -k gevent -b localhost:5000 goserver:myapp

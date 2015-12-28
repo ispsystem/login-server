@@ -1,0 +1,21 @@
+CONFIG = {
+    'working_dir': '/home/user1',
+    'user': 'user1',
+    'group': 'user1',
+    'environment': {
+        'PYTHONPATH': '/home/user1/venv/lib/python2.7/site-packages',
+    },
+    'args': (
+        '--bind=172.31.240.37:8000',
+        '--workers=2',
+        '--timeout=60',
+        '--reload',
+        '--certfile', '/home/user1/server.crt',
+        '--keyfile', '/home/user1/server.key',
+        '--do-handshake-on-connect',
+        '--ssl-version', '5',
+        '--ciphers', 'TLSv1.2,TLSv1',
+        '-k', 'gevent',
+        'goserver:myapp',
+    ),
+}
