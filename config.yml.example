@@ -1,0 +1,7 @@
+keyfile: path to key file
+networks: # allowed ips
+    - 127.0.0.1
+    - 192.168.0.0/24
+users:
+    user: $1$saltsalt$9xy1btjgzLYfb7hivXtC//
+logfile: # path to logfile
