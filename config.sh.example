@@ -1,4 +1,5 @@
 log=/tmp/ssh.log
 logdir=/tmp/sshlogs
 #keyfile=path_to_file
+sudouser=goserver
 

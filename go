@@ -1,6 +1,7 @@
 #!/bin/sh
 
-test -f config.sh && . config.sh
+bdir=$(dirname $0)
+test -f ${bdir}/config.sh && . ${bdir}/config.sh
 
 if [ -z "${log}" ]; then
 	log=/tmp/ssh.log
@@ -13,6 +14,12 @@ test -d ${logdir} || mkdir -p ${logdir}
 
 if [ -n "${keyfile}" ]; then
 	keyopt="-i ${keyfile}"
+fi
+
+if [ -n "${sudouser}" ]; then
+	SSH_CMD="sudo -u ${sudouser} ssh"
+else
+	SSH_CMD="ssh"
 fi
 
 shift #removing -c
@@ -31,5 +38,5 @@ remoteip=`echo $SSH_CONNECTION | cut -d " " -f 1`
 COMMAND="$@"
 echo "`date` :: ${remoteip} : ${USER} :: ${SSH_CONNECTION} :: LOGIN  to ${IP_ADDR}" >> ${log}
 echo "`date` :: ${remoteip} : ${USER} :: ${SSH_CONNECTION} :: RUN $@ on ${IP_ADDR}" >> ${log}
-ssh -o StrictHostKeyChecking=no ${keyopt} root@"${IP_ADDR}" $@ | tee -a ${logdir}/${remoteip}
+${SSH_CMD} -o StrictHostKeyChecking=no ${keyopt} root@"${IP_ADDR}" $@ | tee -a ${logdir}/${remoteip}
 echo "`date` :: ${remoteip} : ${USER} :: ${SSH_CONNECTION} :: LOGOUT to ${IP_ADDR}" >> ${log}
