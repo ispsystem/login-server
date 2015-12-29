@@ -38,5 +38,5 @@ remoteip=`echo $SSH_CONNECTION | cut -d " " -f 1`
 COMMAND="$@"
 echo "`date` :: ${remoteip} : ${USER} :: ${SSH_CONNECTION} :: LOGIN  to ${IP_ADDR}" >> ${log}
 echo "`date` :: ${remoteip} : ${USER} :: ${SSH_CONNECTION} :: RUN $@ on ${IP_ADDR}" >> ${log}
-${SSH_CMD} -o StrictHostKeyChecking=no ${keyopt} root@"${IP_ADDR}" $@ | tee -a ${logdir}/${remoteip}
+${SSH_CMD} -o StrictHostKeyChecking=no ${keyopt} root@"${IP_ADDR}" $@ | tee -a ${logdir}/${remoteip}.log
 echo "`date` :: ${remoteip} : ${USER} :: ${SSH_CONNECTION} :: LOGOUT to ${IP_ADDR}" >> ${log}
